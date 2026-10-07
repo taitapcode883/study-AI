@@ -32,11 +32,11 @@ If a later phase reveals a requirement or design problem, go back to the earlier
 
 The PRD prescribes **Vite + vanilla HTML/CSS/JavaScript**, with unit tests in **Vitest** and deployment on **Vercel**. Don't add a UI framework, backend, database, or authentication.
 
-Once the project is scaffolded (`package.json` doesn't exist yet), confirm the exact scripts there. The expected commands are:
+Scripts (see `package.json`):
 
 - `npm run dev`: Vite dev server
 - `npm run build`: production build to `dist/`
-- `npx vitest run`: run all tests once
+- `npm test` / `npx vitest run`: run all tests once
 - `npx vitest run path/to/file.test.js` or `npx vitest run -t "test name"`: run a single test
 
 ## Architecture guidance
@@ -68,4 +68,7 @@ The custom slash commands in `.claude/commands/` define the git workflow: `/git-
 - `plan.md`: Waterfall project plan
 - `status.md`: project status, technical decisions, change log
 - `docs/`: design documents (Mermaid flowcharts), created in phase 2
+- `index.html`: app page (Vite entry)
+- `src/main.js`, `src/style.css`: UI (DOM wiring) and styles
+- `src/logic/`: pure logic (validation, course list) with colocated Vitest tests `*.test.js`
 - `.claude/commands/`: custom slash commands for the git workflow

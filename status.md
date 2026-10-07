@@ -16,7 +16,7 @@ _Cập nhật lần cuối: 2026-10-07_
 
 | Chức năng | Thiết kế | Cài đặt | Unit test | UAT |
 |-----------|----------|---------|-----------|-----|
-| F1 – Thêm môn học | ✅ | ☐ | ☐ | ☐ |
+| F1 – Thêm môn học | ✅ | ✅ | ✅ | ☐ |
 | F2 – Quy đổi điểm | ✅ | ☐ | ☐ | ☐ |
 | F3 – Tính GPA | ✅ | ☐ | ☐ | ☐ |
 | F4 – Sửa/xoá môn | ✅ | ☐ | ☐ | ☐ |
@@ -30,6 +30,9 @@ _Cập nhật lần cuối: 2026-10-07_
 | 2026-10-07 | Tách logic thuần (validation, quy đổi, GPA, storage) khỏi DOM | Để unit test bằng Vitest không cần trình duyệt |
 | 2026-10-07 | Flowchart thiết kế đặt trong `docs/flowcharts.md` | Gom tài liệu thiết kế một chỗ |
 | 2026-10-07 | Thiết kế được duyệt, gồm cả 6 "Điểm cần anh yêu duyệt" trong `docs/flowcharts.md` | Anh yêu yêu cầu bắt đầu cài đặt |
+| 2026-10-07 | Logic thuần đặt trong `src/logic/` (test cạnh file: `*.test.js`), giao diện trong `src/main.js` | Tách logic khỏi DOM để test bằng Vitest |
+| 2026-10-07 | Ô Số tín chỉ và Điểm dùng `type="text"` (kèm `inputmode`) thay vì `type="number"` | `type="number"` không nhận "8,5" trên một số trình duyệt; validation do ứng dụng tự làm |
+| 2026-10-07 | Làm tròn điểm bằng ký pháp mũ (`8.45e1`) thay vì `x * 10` | Tránh sai số dấu phẩy động (8.45 * 10 = 84.4999… → 8.4 sai) |
 | 2026-10-07 | Mỗi chức năng làm trên một nhánh riêng từ `main`, chỉ merge khi test pass và build thành công | Theo yêu cầu của anh yêu (ghi trong `CLAUDE.md`) |
 
 ## Thay đổi so với ban đầu
