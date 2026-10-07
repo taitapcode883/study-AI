@@ -154,3 +154,48 @@ td.empty {
   text-align: center;
   color: var(--muted);
 }
+
+/* Tổng kết: 2 cột trên điện thoại, 3 cột trên màn rộng */
+.summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .summary {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.stat {
+  padding: 10px 12px;
+  background: var(--bg);
+  border-radius: 8px;
+}
+
+.stat dt {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.stat dd {
+  margin: 2px 0 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.stat-main dd {
+  font-size: 1.4rem;
+  color: var(--primary);
+}
+
+.hint {
+  margin: 12px 0 0;
+  color: var(--muted);
+}
+
+.hint[hidden] {
+  display: none;
+}

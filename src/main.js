@@ -2,6 +2,7 @@ import './style.css';
 import { validateCourseInput } from './logic/validation.js';
 import { addCourse, createCourse } from './logic/courses.js';
 import { convertGrade } from './logic/grading.js';
+import { summarize } from './logic/gpa.js';
 
 const FIELDS = ['name', 'credits', 'grade'];
 
@@ -17,6 +18,15 @@ const errorEls = {
   credits: document.querySelector('#error-credits'),
   grade: document.querySelector('#error-grade'),
 };
+const summaryEls = {
+  courseCount: document.querySelector('#sum-courses'),
+  totalCredits: document.querySelector('#sum-credits'),
+  passedCredits: document.querySelector('#sum-passed'),
+  gpa4: document.querySelector('#sum-gpa4'),
+  gpa10: document.querySelector('#sum-gpa10'),
+  classification: document.querySelector('#sum-class'),
+};
+const emptyHint = document.querySelector('#empty-hint');
 
 let courses = [];
 
@@ -59,6 +69,24 @@ function renderTable() {
   });
 }
 
+function renderSummary() {
+  const summary = summarize(courses);
+  const empty = courses.length === 0;
+
+  summaryEls.courseCount.textContent = String(summary.courseCount);
+  summaryEls.totalCredits.textContent = String(summary.totalCredits);
+  summaryEls.passedCredits.textContent = String(summary.passedCredits);
+  summaryEls.gpa4.textContent = empty ? '—' : summary.gpa4.toFixed(2);
+  summaryEls.gpa10.textContent = empty ? '—' : summary.gpa10.toFixed(2);
+  summaryEls.classification.textContent = summary.classification ?? '—';
+  emptyHint.hidden = !empty;
+}
+
+function render() {
+  renderTable();
+  renderSummary();
+}
+
 form.addEventListener('submit', (event) => {
   event.preventDefault();
 
@@ -76,9 +104,9 @@ form.addEventListener('submit', (event) => {
   }
 
   courses = addCourse(courses, createCourse(result.value));
-  renderTable();
+  render();
   form.reset();
   inputs.name.focus();
 });
 
-renderTable();
+render();
