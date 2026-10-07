@@ -58,6 +58,8 @@ Domain rules that are easy to get wrong (see `PRD.md` for the full rules):
 
 ## Git workflow
 
+**One branch per feature:** each feature (F1–F5) is developed on its own branch created from `main` (e.g. `feature/f1-...`). Merge it into `main` only after the feature is complete and error-free (all Vitest tests pass and the build succeeds). Don't commit feature work directly to `main`.
+
 The custom slash commands in `.claude/commands/` define the git workflow: `/git-branch`, `/commit`, `/merge`, `/push` (confirm before pushing to main), `/pull`, `/wrap-up`, `/learn-by-mistake` (logs mistakes and fixes in `common_errors.md`). `/wrap-up` keeps the "Project structure" section below up to date.
 
 ## Project structure

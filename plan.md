@@ -23,7 +23,7 @@ flowchart LR
 - [x] F3 – Tính GPA và xếp loại (kể cả trường hợp chưa có môn)
 - [x] F4 – Sửa và xoá môn học (kể cả xác nhận xoá)
 - [x] F5 – Lưu/tải dữ liệu localStorage (kể cả dữ liệu hỏng, Xoá tất cả)
-- [ ] Anh yêu duyệt thiết kế
+- [x] Anh yêu duyệt thiết kế
 
 **Sản phẩm:** `docs/flowcharts.md` (cú pháp Mermaid `flowchart`)
 **Điều kiện hoàn thành:** Anh yêu duyệt toàn bộ flowchart.
