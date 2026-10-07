@@ -3,6 +3,7 @@ import { validateCourseInput } from './logic/validation.js';
 import { addCourse, createCourse, removeCourse, updateCourse } from './logic/courses.js';
 import { convertGrade } from './logic/grading.js';
 import { summarize } from './logic/gpa.js';
+import { loadCourses, saveCourses } from './logic/storage.js';
 
 const FIELDS = ['name', 'credits', 'grade'];
 const COLUMN_COUNT = 7;
@@ -30,13 +31,15 @@ const summaryEls = {
   classification: document.querySelector('#sum-class'),
 };
 const emptyHint = document.querySelector('#empty-hint');
+const clearAllButton = document.querySelector('#clear-all');
 
-let courses = [];
+let courses = loadCourses();
 /** id của môn đang sửa trên form, null khi đang ở chế độ thêm. */
 let editingId = null;
 
 function setCourses(next) {
   courses = next;
+  saveCourses(courses);
   render();
 }
 
@@ -109,6 +112,7 @@ function renderSummary() {
   summaryEls.gpa10.textContent = empty ? '—' : summary.gpa10.toFixed(2);
   summaryEls.classification.textContent = summary.classification ?? '—';
   emptyHint.hidden = !empty;
+  clearAllButton.disabled = empty;
 }
 
 function render() {
@@ -141,6 +145,15 @@ function deleteCourse(course) {
   if (course.id === editingId) resetForm();
   setCourses(removeCourse(courses, course.id));
 }
+
+function clearAll() {
+  if (courses.length === 0) return;
+  if (!window.confirm('Xoá tất cả môn học? Không thể hoàn tác.')) return;
+  resetForm();
+  setCourses([]);
+}
+
+clearAllButton.addEventListener('click', clearAll);
 
 rows.addEventListener('click', (event) => {
   const button = event.target.closest('button[data-action]');

@@ -70,5 +70,5 @@ The custom slash commands in `.claude/commands/` define the git workflow: `/git-
 - `docs/`: design documents (Mermaid flowcharts), created in phase 2
 - `index.html`: app page (Vite entry)
 - `src/main.js`, `src/style.css`: UI (DOM wiring) and styles
-- `src/logic/`: pure logic (validation, course list) with colocated Vitest tests `*.test.js`
+- `src/logic/`: pure logic (validation, course list, grade conversion, GPA, localStorage) with colocated Vitest tests `*.test.js`
 - `.claude/commands/`: custom slash commands for the git workflow
