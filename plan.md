@@ -17,12 +17,12 @@ flowchart LR
 **Điều kiện hoàn thành:** PRD được chốt.
 
 ## Giai đoạn 2 – Thiết kế luồng nghiệp vụ
-- [ ] Luồng tổng thể của ứng dụng (khởi động → tải dữ liệu → hiển thị)
-- [ ] F1 – Thêm môn học (nhập, validation, báo lỗi, thêm vào bảng)
-- [ ] F2 – Quy đổi điểm (hệ 10 → điểm chữ → hệ 4)
-- [ ] F3 – Tính GPA và xếp loại (kể cả trường hợp chưa có môn)
-- [ ] F4 – Sửa và xoá môn học (kể cả xác nhận xoá)
-- [ ] F5 – Lưu/tải dữ liệu localStorage (kể cả dữ liệu hỏng, Xoá tất cả)
+- [x] Luồng tổng thể của ứng dụng (khởi động → tải dữ liệu → hiển thị)
+- [x] F1 – Thêm môn học (nhập, validation, báo lỗi, thêm vào bảng)
+- [x] F2 – Quy đổi điểm (hệ 10 → điểm chữ → hệ 4)
+- [x] F3 – Tính GPA và xếp loại (kể cả trường hợp chưa có môn)
+- [x] F4 – Sửa và xoá môn học (kể cả xác nhận xoá)
+- [x] F5 – Lưu/tải dữ liệu localStorage (kể cả dữ liệu hỏng, Xoá tất cả)
 - [ ] Anh yêu duyệt thiết kế
 
 **Sản phẩm:** `docs/flowcharts.md` (cú pháp Mermaid `flowchart`)
