@@ -1,12 +1,15 @@
 import './style.css';
 import { validateCourseInput } from './logic/validation.js';
-import { addCourse, createCourse } from './logic/courses.js';
+import { addCourse, createCourse, removeCourse, updateCourse } from './logic/courses.js';
 import { convertGrade } from './logic/grading.js';
 import { summarize } from './logic/gpa.js';
 
 const FIELDS = ['name', 'credits', 'grade'];
+const COLUMN_COUNT = 7;
 
 const form = document.querySelector('#course-form');
+const formTitle = document.querySelector('#form-title');
+const submitButton = document.querySelector('#submit-button');
 const rows = document.querySelector('#course-rows');
 const inputs = {
   name: document.querySelector('#course-name'),
@@ -29,6 +32,13 @@ const summaryEls = {
 const emptyHint = document.querySelector('#empty-hint');
 
 let courses = [];
+/** id của môn đang sửa trên form, null khi đang ở chế độ thêm. */
+let editingId = null;
+
+function setCourses(next) {
+  courses = next;
+  render();
+}
 
 function showErrors(errors) {
   for (const field of FIELDS) {
@@ -44,7 +54,7 @@ function renderTable() {
   if (courses.length === 0) {
     const row = rows.insertRow();
     const cell = row.insertCell();
-    cell.colSpan = 6;
+    cell.colSpan = COLUMN_COUNT;
     cell.className = 'empty';
     cell.textContent = 'Chưa có môn học nào';
     return;
@@ -52,6 +62,7 @@ function renderTable() {
 
   courses.forEach((course, index) => {
     const row = rows.insertRow();
+    if (course.id === editingId) row.className = 'editing';
     const { letter, point4 } = convertGrade(course.grade);
     const cells = [
       [String(index + 1), ''],
@@ -66,7 +77,25 @@ function renderTable() {
       cell.textContent = text;
       if (className) cell.className = className;
     }
+
+    const actions = row.insertCell();
+    actions.className = 'actions';
+    actions.append(
+      actionButton('edit', 'Sửa', course),
+      actionButton('delete', 'Xoá', course),
+    );
   });
+}
+
+function actionButton(action, label, course) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = `btn-small btn-${action}`;
+  button.dataset.action = action;
+  button.dataset.id = course.id;
+  button.textContent = label;
+  button.setAttribute('aria-label', `${label} môn ${course.name}`);
+  return button;
 }
 
 function renderSummary() {
@@ -87,6 +116,42 @@ function render() {
   renderSummary();
 }
 
+function resetForm() {
+  editingId = null;
+  form.reset();
+  showErrors({});
+  formTitle.textContent = 'Thêm môn học';
+  submitButton.textContent = 'Thêm môn';
+}
+
+function startEdit(course) {
+  editingId = course.id;
+  inputs.name.value = course.name;
+  inputs.credits.value = String(course.credits);
+  inputs.grade.value = String(course.grade);
+  showErrors({});
+  formTitle.textContent = 'Sửa môn học';
+  submitButton.textContent = 'Lưu';
+  renderTable();
+  inputs.name.focus();
+}
+
+function deleteCourse(course) {
+  if (!window.confirm(`Xoá môn "${course.name}"?`)) return;
+  if (course.id === editingId) resetForm();
+  setCourses(removeCourse(courses, course.id));
+}
+
+rows.addEventListener('click', (event) => {
+  const button = event.target.closest('button[data-action]');
+  if (!button) return;
+  const course = courses.find((item) => item.id === button.dataset.id);
+  if (!course) return;
+
+  if (button.dataset.action === 'edit') startEdit(course);
+  if (button.dataset.action === 'delete') deleteCourse(course);
+});
+
 form.addEventListener('submit', (event) => {
   event.preventDefault();
 
@@ -103,9 +168,11 @@ form.addEventListener('submit', (event) => {
     return;
   }
 
-  courses = addCourse(courses, createCourse(result.value));
-  render();
-  form.reset();
+  const next = editingId
+    ? updateCourse(courses, editingId, result.value)
+    : addCourse(courses, createCourse(result.value));
+  resetForm();
+  setCourses(next);
   inputs.name.focus();
 });
 
