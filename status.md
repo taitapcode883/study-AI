@@ -3,7 +3,7 @@
 _Cập nhật lần cuối: 2026-10-07_
 
 ## Trạng thái hiện tại
-- **Giai đoạn:** 3 – Cài đặt & kiểm thử tự động (đang làm F1)
+- **Giai đoạn:** 3 – Cài đặt & kiểm thử tự động (F1, F2 xong; tiếp theo F3)
 - **URL production:** chưa có
 
 | Giai đoạn | Trạng thái |
@@ -17,7 +17,7 @@ _Cập nhật lần cuối: 2026-10-07_
 | Chức năng | Thiết kế | Cài đặt | Unit test | UAT |
 |-----------|----------|---------|-----------|-----|
 | F1 – Thêm môn học | ✅ | ✅ | ✅ | ☐ |
-| F2 – Quy đổi điểm | ✅ | ☐ | ☐ | ☐ |
+| F2 – Quy đổi điểm | ✅ | ✅ | ✅ | ☐ |
 | F3 – Tính GPA | ✅ | ☐ | ☐ | ☐ |
 | F4 – Sửa/xoá môn | ✅ | ☐ | ☐ | ☐ |
 | F5 – Lưu dữ liệu | ✅ | ☐ | ☐ | ☐ |
@@ -33,6 +33,7 @@ _Cập nhật lần cuối: 2026-10-07_
 | 2026-10-07 | Logic thuần đặt trong `src/logic/` (test cạnh file: `*.test.js`), giao diện trong `src/main.js` | Tách logic khỏi DOM để test bằng Vitest |
 | 2026-10-07 | Ô Số tín chỉ và Điểm dùng `type="text"` (kèm `inputmode`) thay vì `type="number"` | `type="number"` không nhận "8,5" trên một số trình duyệt; validation do ứng dụng tự làm |
 | 2026-10-07 | Làm tròn điểm bằng ký pháp mũ (`8.45e1`) thay vì `x * 10` | Tránh sai số dấu phẩy động (8.45 * 10 = 84.4999… → 8.4 sai) |
+| 2026-10-07 | Bảng quy đổi F2 là mảng `GRADE_SCALE` (mốc dưới, giảm dần) trong `src/logic/grading.js`; `convertGrade` tự làm tròn 1 chữ số trước khi so mốc | Một nguồn dữ liệu cho cả F2 và F3; an toàn kể cả khi nhận điểm chưa làm tròn |
 | 2026-10-07 | Mỗi chức năng làm trên một nhánh riêng từ `main`, chỉ merge khi test pass và build thành công | Theo yêu cầu của anh yêu (ghi trong `CLAUDE.md`) |
 
 ## Thay đổi so với ban đầu

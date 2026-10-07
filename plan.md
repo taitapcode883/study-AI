@@ -31,7 +31,7 @@ flowchart LR
 ## Giai đoạn 3 – Cài đặt và kiểm thử tự động
 - [x] Khởi tạo dự án Vite (JS thuần) + cấu hình Vitest
 - [x] F1 – Thêm môn học + unit test validation
-- [ ] F2 – Quy đổi điểm + unit test (đủ các mốc biên: 3.9/4.0, 4.9/5.0, 5.4/5.5, 6.4/6.5, 6.9/7.0, 7.9/8.0, 8.4/8.5, 10)
+- [x] F2 – Quy đổi điểm + unit test (đủ các mốc biên: 3.9/4.0, 4.9/5.0, 5.4/5.5, 6.4/6.5, 6.9/7.0, 7.9/8.0, 8.4/8.5, 10)
 - [ ] F3 – Tính GPA, xếp loại + unit test (làm tròn, danh sách rỗng, tín chỉ đạt)
 - [ ] F4 – Sửa/xoá môn + unit test
 - [ ] F5 – Lưu localStorage + unit test (dữ liệu hỏng, Xoá tất cả)

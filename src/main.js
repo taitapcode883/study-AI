@@ -1,6 +1,7 @@
 import './style.css';
 import { validateCourseInput } from './logic/validation.js';
 import { addCourse, createCourse } from './logic/courses.js';
+import { convertGrade } from './logic/grading.js';
 
 const FIELDS = ['name', 'credits', 'grade'];
 
@@ -33,7 +34,7 @@ function renderTable() {
   if (courses.length === 0) {
     const row = rows.insertRow();
     const cell = row.insertCell();
-    cell.colSpan = 4;
+    cell.colSpan = 6;
     cell.className = 'empty';
     cell.textContent = 'Chưa có môn học nào';
     return;
@@ -41,11 +42,14 @@ function renderTable() {
 
   courses.forEach((course, index) => {
     const row = rows.insertRow();
+    const { letter, point4 } = convertGrade(course.grade);
     const cells = [
       [String(index + 1), ''],
       [course.name, 'name'],
       [String(course.credits), 'num'],
       [course.grade.toFixed(1), 'num'],
+      [letter, 'num'],
+      [point4.toFixed(1), 'num'],
     ];
     for (const [text, className] of cells) {
       const cell = row.insertCell();
