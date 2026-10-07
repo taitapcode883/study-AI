@@ -199,3 +199,45 @@ td.empty {
 .hint[hidden] {
   display: none;
 }
+
+/* Nút Sửa/Xoá trên từng dòng */
+td.actions,
+th.actions {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.btn-small {
+  padding: 6px 10px;
+  font-size: 0.875rem;
+}
+
+.btn-small + .btn-small {
+  margin-left: 6px;
+}
+
+.btn-edit {
+  color: var(--primary);
+  background: transparent;
+  border: 1px solid var(--primary);
+}
+
+.btn-edit:hover {
+  color: #fff;
+  background: var(--primary);
+}
+
+.btn-delete {
+  color: var(--error);
+  background: transparent;
+  border: 1px solid var(--error);
+}
+
+.btn-delete:hover {
+  color: #fff;
+  background: var(--error);
+}
+
+tr.editing td {
+  background: #eef2ff;
+}
